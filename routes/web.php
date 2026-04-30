@@ -63,7 +63,7 @@ Route::get('/pnp/{jurusan}/{prodi}', function ($jurusan, $prodi) {
 Route::get('/mahasiswa',[MahasiswaController::class,'index']);
 Route::get('/mahasiswa_show', [MahasiswaController::class,'show']);
 
-Route::resource('mahasiswa', MahasiswaController::class);
+Route::get('/mahasiswa', [MahasiswaController::class,'latest']);
 Route::get('/dosenn', [\App\Http\Controllers\Auth\DosenController::class, 'index']);
 Route::get('/insert-sql', [MahasiswaController::class,'insertSQL']);
 Route::get('/insert-prepared', [MahasiswaController::class,'insertPrepared']);
@@ -73,7 +73,7 @@ Route::get('/delete', [MahasiswaController::class,'delete']);
 Route::get('/select',[MahasiswaController::class,'select']);
 Route::get('/select-tampil',[MahasiswaController::class,'selectTampil']);
 Route::get('/select-view', [MahasiswaController::class,'selectView']);
-Route::get('/select-where', [MahasiswaController::class,'selectWhere ']);
+Route::get('/select-where', [MahasiswaController::class,'selectWhere']);
 Route::get('/statement', [MahasiswaController::class,'statement']);
 
 Route::get('/insert-dosen', [DosenController::class,'insertDosen']);
@@ -98,15 +98,15 @@ Route::get('/mass-assigment',[MahasiswaController::class,'massAssigment']);
 Route::get('/update-orm',[MahasiswaController::class,'updateter']);
 Route::get('/update-where',[MahasiswaController::class,'updateWhere']);
 Route::get('/mass-update',[MahasiswaController::class,'massUpdate']);
-route::get('/delete-orm',[MahasiswaController::class,'deleteOrm']);
+Route::get('/delete-orm',[MahasiswaController::class,'deleteOrm']);
 Route::get('/destroy-orm',[MahasiswaController::class,'destroy']);
 Route::get('/mass-delete',[MahasiswaController::class,'massDelete']);
-Route::get('/get-all',[MahasiswaController::class,'all']);
+Route::get('/get-all',[MahasiswaController::class,'allView']);
 Route::get('/get-second',[MahasiswaController::class,'allSecond']);
 Route::get('/all-views',[MahasiswaController::class,'allView']);
-Route::get('/get-where',[MahasiswaController::class,'getWhere']);
-Route::get('/first',[MahasiswaController::class,'first']);
-Route::get('/find',[MahasiswaController::class,'find']);
+Route::get('/get-where-mhs',[MahasiswaController::class,'getWhere']);
+Route::get('/first-mhs',[MahasiswaController::class,'first']);
+Route::get('/find-mhs',[MahasiswaController::class,'find']);
 Route::get('/latest',[MahasiswaController::class,'latest']);
 Route::get('/limit',[MahasiswaController::class,'limit']);
 Route::get('/skip-take',[MahasiswaController::class,'skipTake']);
