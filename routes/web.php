@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\ProdiController;
 use Database\Seeders\mahasiswaSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -119,3 +120,11 @@ Route::get('/mahasiswa/create', [MahasiswaController::class,'add']);
 Route::post('/mahasiswa', [MahasiswaController::class, 'store']);
 Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
 Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'updateData']);
+
+// ===================== PRODI ROUTES =====================
+Route::get('/prodi', [ProdiController::class, 'index']);
+Route::get('/prodi/create', [ProdiController::class, 'create']);
+Route::post('/prodi', [ProdiController::class, 'store']);
+Route::get('/prodi/{id}/edit', [ProdiController::class, 'edit']);
+Route::put('/prodi/{id}', [ProdiController::class, 'update']);
+Route::delete('/prodi/{id}', [ProdiController::class, 'destroy']);
