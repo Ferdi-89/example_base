@@ -31,7 +31,19 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nim' => 'required|unique:mahasiswas,nim|max:10',
+            'nama_lengkap' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'email' => 'required|email|unique:mahasiswas,email|max:255',
+            'prodi' => 'required|string',
+            'alamat' => 'required|string',
+        ]);
+
+        mahasiswa::create($validatedData);
+
+        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa berhasil ditambahkan!');
     }
 
     /**
@@ -47,13 +59,30 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mhs = mahasiswa::findOrFail($id);
+        return view('akademik.edit', ['mhs' => $mhs]);
     }
 
     /**
      * Update the specified resource in storage.
      */
+    public function updateData(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'nim' => 'required|max:10|unique:mahasiswas,nim,' . $id,
+            'nama_lengkap' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'email' => 'required|email|max:255|unique:mahasiswas,email,' . $id,
+            'prodi' => 'required|string',
+            'alamat' => 'required|string',
+        ]);
 
+        $mhs = mahasiswa::findOrFail($id);
+        $mhs->update($validatedData);
+
+        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa berhasil diperbarui!');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -309,5 +338,9 @@ class MahasiswaController extends Controller
         public function forceDelete(){
             mahasiswa::where('id','3')->forceDelete();
             return 'Berhasil dihapus secara permanen';
+        }
+
+        public function add(){
+            return view('akademik.create');
         }
 }

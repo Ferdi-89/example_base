@@ -115,3 +115,7 @@ Route::get('/trashcan',[MahasiswaController::class,'trashCan']);
 Route::get('/restore',[MahasiswaController::class,'restore']);
 Route::get('/force-delete',[MahasiswaController::class,'forceDelete']);
 Route::get('/all-dosen',[DosenController::class,'get']);
+Route::get('/mahasiswa/create', [MahasiswaController::class,'add']);
+Route::post('/mahasiswa', [MahasiswaController::class, 'store']);
+Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
+Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'updateData']);
