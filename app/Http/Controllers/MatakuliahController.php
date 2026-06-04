@@ -16,14 +16,14 @@ class MatakuliahController extends Controller
         return view('akademik.matakuliah.create');
     }
     public function store (Request $request){
-        $this->validate($request, [
-            'kode_matakuliah' => 'required',
-            'nama_matakuliah' => 'required',
-            'semester' => 'required',
-            'jenis_matakuliah' => 'required',
-            'sks' => 'required',
-            'jam' => 'required',
-            'keterangan' => 'nullable',
+        $request->validate([
+            'kode_matakuliah' => 'required|string|max:10',
+            'nama_matakuliah' => 'required|string|max:100',
+            'semester' => 'required|integer|min:1|max:8',
+            'jenis_matakuliah' => 'required|in:Teori,Praktek',
+            'sks' => 'required|integer|min:1|max:6',
+            'jam' => 'required|integer|min:1|max:10',
+            'keterangan' => 'nullable|string|max:255',
         ]);
 
         DB::table('matakuliahs')->insert([
@@ -45,14 +45,14 @@ class MatakuliahController extends Controller
         return view('akademik.matakuliah.edit', ['mk' => $mk]);
     }
     public function update (Request $request,$id){
-        $this->validate($request, [
-            'kode_matakuliah' => 'required',
-            'nama_matakuliah' => 'required',
-            'semester' => 'required',
-            'jenis_matakuliah' => 'required',
-            'sks' => 'required',
-            'jam' => 'required',
-            'keterangan' => 'nullable',
+        $request->validate([
+            'kode_matakuliah' => 'required|string|max:10',
+            'nama_matakuliah' => 'required|string|max:100',
+            'semester' => 'required|integer|min:1|max:8',
+            'jenis_matakuliah' => 'required|in:Teori,Praktek',
+            'sks' => 'required|integer|min:1|max:6',
+            'jam' => 'required|integer|min:1|max:10',
+            'keterangan' => 'nullable|string|max:255',
         ]);
 
         DB::table('matakuliahs')->where('id', $id)->update([

@@ -36,14 +36,14 @@
                 @forelse ($mk as $item)
                     <tr>
                         <td>{{ ($mk->currentPage() - 1) * $mk->perPage() + $loop->iteration }}</td>
-                        <td><span class="badge bg-secondary font-monospace">{{ $item->kode_matakuliah }}</span></td>
+                        <td><span>{{ $item->kode_matakuliah }}</span></td>
                         <td>{{ $item->nama_matakuliah }}</td>
                         <td>{{ $item->semester }}</td>
                         <td>
                             @if($item->jenis_matakuliah === 'Teori')
-                                <span class="badge bg-info text-dark">Teori</span>
+                                <span>Teori</span>
                             @else
-                                <span class="badge bg-warning text-dark">Praktek</span>
+                                <span>Praktek</span>
                             @endif
                         </td>
                         <td>{{ $item->sks }}</td>
@@ -54,7 +54,8 @@
                                 <a href="/matakuliah/{{ $item->id }}/edit" class="btn btn-warning btn-sm">
                                     Edit
                                 </a>
-                                <form action="/matakuliah/{{ $item->id }}" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus matakuliah ini?')">
+                                <form action="/matakuliah/{{ $item->id }}" method="post"
+                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus matakuliah ini?')">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">

@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="semester" class="form-label font-weight-bold">Semester</label>
-                            <input type="number" class="form-control @error('semester') is-invalid @enderror" id="semester" name="semester" value="{{ old('semester') }}" min="1" max="8">
+                            <input type="number" class="form-control @error('semester') is-invalid @enderror" id="semester" name="semester" value="{{ old('semester') }}">
                             @error('semester')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="sks" class="form-label font-weight-bold">SKS</label>
-                            <input type="number" class="form-control @error('sks') is-invalid @enderror" id="sks" name="sks" value="{{ old('sks') }}" min="1" max="6">
+                            <input type="number" class="form-control @error('sks') is-invalid @enderror" id="sks" name="sks" value="{{ old('sks') }}">
                             @error('sks')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -61,7 +61,7 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="jam" class="form-label font-weight-bold">Jam</label>
-                            <input type="number" class="form-control @error('jam') is-invalid @enderror" id="jam" name="jam" value="{{ old('jam') }}" min="1" max="10">
+                            <input type="number" class="form-control @error('jam') is-invalid @enderror" id="jam" name="jam" value="{{ old('jam') }}">
                             @error('jam')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
