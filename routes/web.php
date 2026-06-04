@@ -3,6 +3,7 @@
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\MatakuliahController;
 use Database\Seeders\mahasiswaSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -121,10 +122,18 @@ Route::post('/mahasiswa', [MahasiswaController::class, 'store']);
 Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit']);
 Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'updateData']);
 
-// ===================== PRODI ROUTES =====================
+// prodi
 Route::get('/prodi', [ProdiController::class, 'index']);
 Route::get('/prodi/create', [ProdiController::class, 'create']);
 Route::post('/prodi', [ProdiController::class, 'store']);
 Route::get('/prodi/{id}/edit', [ProdiController::class, 'edit']);
 Route::put('/prodi/{id}', [ProdiController::class, 'update']);
 Route::delete('/prodi/{id}', [ProdiController::class, 'destroy']);
+
+// matakuliah
+Route::get('/matakuliah', [MatakuliahController::class, 'index']);
+Route::get('/matakuliah/create', [MatakuliahController::class, 'create']);
+Route::post('/matakuliah', [MatakuliahController::class, 'store']);
+Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit']);
+Route::put('/matakuliah/{id}', [MatakuliahController::class, 'update']);
+Route::delete('/matakuliah/{id}', [MatakuliahController::class, 'destroy']);

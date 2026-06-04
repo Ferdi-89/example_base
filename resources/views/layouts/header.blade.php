@@ -9,11 +9,13 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item"><a class="nav-link" href="/layouts">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/mahasiswa">Mahasiswa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/dosen">Dosen</a></li>
-                    <li class="nav-item"><a class="nav-link"
-                            href="{{ route('prodi', ['jurusan' => 'Teknologi Informasi', 'prodi' => 'TRPL']) }}">Prodi</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/mahasiswa" aria-disabled="true">Mahasiswa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dosen" aria-disabled="true">Dosen</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link"
+                            href="{{ route('prodi', ['jurusan' => 'Teknologi Informasi', 'prodi' => 'TRPL']) }}"
+                            disabled>Prodi</a>
+                    </li> --}}
+                    <li class="nav-item"><a class="nav-link" href="/matakuliah">Matakuliah</a></li>
                 </ul>
             </div>
         </div>
