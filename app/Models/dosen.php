@@ -16,7 +16,7 @@ class dosen extends Model
         'nama',
         'email',
         'no_telp',
-        'prodi',
+        'prodi_id',
         'alamat'
     ];
 }

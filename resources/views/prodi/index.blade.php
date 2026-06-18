@@ -5,7 +5,9 @@
 @section('container')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-0">Daftar Program Studi</h1>
+        @auth
         <a href="/prodi/create" class="btn btn-primary">+ Tambah Prodi</a>
+        @endauth
     </div>
 
     @if (session('success'))
@@ -23,7 +25,9 @@
                     <th>Nama Program Studi</th>
                     <th>Jenjang Studi</th>
                     <th>Keterangan</th>
+                    @auth
                     <th class="text-center">Aksi</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +37,7 @@
                         <td>{{ $prodi->nama_prodi }}</td>
                         <td><span class="badge bg-secondary">{{ $prodi->jenjang_studi }}</span></td>
                         <td>{{ $prodi->keterangan ?? '-' }}</td>
+                        @auth
                         <td>
                             <div class="d-flex gap-2 justify-content-center">
                                 <a href="/prodi/{{ $prodi->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
@@ -44,6 +49,7 @@
                                 </form>
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>

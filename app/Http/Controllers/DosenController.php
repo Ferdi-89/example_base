@@ -16,7 +16,7 @@ class DosenController extends Controller
                 'nama' => 'M Rasyid',
                 'email' => 'rasyid@gmail.com',
                 'no_telp' => '081234567890',
-                'prodi' => 'Management Informatika',
+                'prodi_id' => '3',
                 'alamat' => 'Jl.Rasuna no.5 Padang',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -34,7 +34,7 @@ class DosenController extends Controller
                     'nama' => 'M Yazid',
                     'email' => 'yazid@gmail.com',
                     'no_telp' => '123144567890',
-                    'prodi' => 'TRPL',
+                    'prodi_id' => '2',
                     'alamat' => 'Jl.Sutomo no.1 Padang',
                     'created_at' => now(),
                     'updated_at' => now()
@@ -44,7 +44,7 @@ class DosenController extends Controller
                     'nama' => 'Deni',
                     'email' => 'Deni@gmail.com',
                     'no_telp' => '190294567890',
-                    'prodi' => 'TRPL',
+                    'prodi_id' => '1',
                     'alamat' => 'Jl.Hatta no.15 Padang',
                     'created_at' => now(),
                     'updated_at' => now()
@@ -59,7 +59,7 @@ class DosenController extends Controller
             ->update(
                 [
                     'no_telp'=>'12903719023',
-                    'prodi'=>'Teknik Komputer',
+                    'prodi_id'=>'1',
                     'updated_at'=>now(),
                 ]
                 );
@@ -69,7 +69,7 @@ class DosenController extends Controller
     public function updateWhereDosen(){
         $query = DB::table('dosens')
         -> where('nama','Deni')
-        -> where('prodi','<>','TRPL')
+        -> where('prodi_id','<>','TRPL')
         -> update(
             [
                 'email'=>'deni@gmail.com',
@@ -117,7 +117,7 @@ class DosenController extends Controller
             echo $query[0]->nama . "<br>";
             echo $query[0]->email . "<br>";
             echo $query[0]->no_telp . "<br>";
-            echo $query[0]->prodi . "<br>";
+            echo $query[0]->prodi_id . "<br>";
             echo $query[0]->alamat . "<br>";
             echo "<br>";
             $i++;
@@ -132,7 +132,7 @@ class DosenController extends Controller
 
     public function getWhere(){
         $query=DB::table('dosens')
-        ->where('prodi','Management Informatika')
+        ->where('prodi_id','1')
         ->orderBy('nama','desc')
         ->get();
         return view('akademik.dosen',['dosen'=>$query]);

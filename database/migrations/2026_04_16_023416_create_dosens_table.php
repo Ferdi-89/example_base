@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->char('no_telp', 15);
-            $table->string('prodi');
+            $table->foreignId('prodi_id')->constrained('prodis')->onDelete('cascade');
             $table->string('alamat');
             $table->timestamps();
         });

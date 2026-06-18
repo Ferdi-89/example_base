@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\http\Controllers;
 
 use App\Models\mahasiswa;
+use App\Models\Prodi;
 
 class MahasiswaController extends Controller
 {
@@ -37,7 +38,7 @@ class MahasiswaController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
             'email' => 'required|email|unique:mahasiswas,email|max:255',
-            'prodi' => 'required|string',
+            'prodi_id' => 'required|integer',
             'alamat' => 'required|string',
         ]);
 
@@ -74,7 +75,7 @@ class MahasiswaController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
             'email' => 'required|email|max:255|unique:mahasiswas,email,' . $id,
-            'prodi' => 'required|string',
+            'prodi_id' => 'required|integer',
             'alamat' => 'required|string',
         ]);
 
@@ -89,21 +90,21 @@ class MahasiswaController extends Controller
      */
 
     public function insertSQl() {
-        $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi,alamat,created_at,updated_at) VALUES ('2022090909','Linus B Torvalds','Finlandia','1971-08-12','Linus@linux.org','TRPL','Jl.Sudirman no.10 Padang',now(),now())" );
+        $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi_id,alamat,created_at,updated_at) VALUES ('2022090909','Linus B Torvalds','Finlandia','1971-08-12','Linus@linux.org',1,'Jl.Sudirman no.10 Padang',now(),now())" );
     }
     public function insertPrepared() {
-    $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi,alamat,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?)",["2022090909","Taylor Otwell","Amerika","1989-08-12","Taylor@linux.org","TRPL","Jl.Sudirman no.10 Padang",now(),now()]);
+    $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi_id,alamat,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?)",["2022090909","Taylor Otwell","Amerika","1989-08-12","Taylor@linux.org",1,"Jl.Sudirman no.10 Padang",now(),now()]);
     }
 
     public function insertBinding() {
-        $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi,alamat,created_at,updated_at) VALUES (:nim,:nama_lengkap,:tempat_lahir,:tgl_lahir,:email,:prodi,:alamat,:created_at,:updated_at)",
+        $query=DB::insert("INSERT INTO mahasiswas(nim,nama_lengkap,tempat_lahir,tgl_lahir,email,prodi_id,alamat,created_at,updated_at) VALUES (:nim,:nama_lengkap,:tempat_lahir,:tgl_lahir,:email,:prodi_id,:alamat,:created_at,:updated_at)",
         [
             'nim'=>'2411081009',
             'nama_lengkap'=>'Laura',
             'tempat_lahir'=>'Padang',
             'tgl_lahir'=>'2006-2-12',
             'email'=>'Laura@gmail.com',
-            'prodi'=>'MI',
+            'prodi_id'=>2,
             'alamat'=>'Jl.Sudirman no.10 Padang',
             'created_at'=>now(),
             'updated_at'=>now()
@@ -134,7 +135,7 @@ class MahasiswaController extends Controller
         echo ($query[$i]->tempat_lahir) . "<br />";
         echo ($query[$i]->tgl_lahir) . "<br />";
         echo ($query[$i]->email) . "<br />";
-        echo ($query[$i]->prodi) . "<br />";
+        echo ($query[$i]->prodi_id) . "<br />";
         echo ($query[$i]->alamat) . "<br>";
         echo ($query[$i]->created_at) . "<br>";
         echo ($query[$i]->updated_at) . "<br>";
@@ -148,7 +149,7 @@ class MahasiswaController extends Controller
     }
 
     public function selectWhere(){
-        $query=DB::select('SELECT * FROM mahasiswas WHERE  prodi=? ORDER BY nim ASC',['MI']);
+        $query=DB::select('SELECT * FROM mahasiswas WHERE  prodi_id=? ORDER BY nim ASC',[2]);
         return view('akademik.mahasiswa',['mhs'=>$query]);
     }
 
@@ -164,7 +165,7 @@ class MahasiswaController extends Controller
         $mahasiswa->tempat_lahir='Padang';
         $mahasiswa->tgl_lahir='2006-2-12';
         $mahasiswa->email='Laura@gmail.com';
-        $mahasiswa->prodi='MI';
+        $mahasiswa->prodi_id=2;
         $mahasiswa->alamat='Jl.Sudirman no.10 Padang';
         $mahasiswa->created_at=now();
         $mahasiswa->updated_at=now();
@@ -181,7 +182,7 @@ class MahasiswaController extends Controller
                 'tempat_lahir'=>'Padang',
                 'tgl_lahir'=>'2006-2-12',
                 'email'=>'laura@gmail.com',
-                'prodi'=>'TRPL',
+                'prodi_id'=>1,
                 'alamat'=>'Jln.Raya Sungai Pua no.29',
                 'created_at'=>now(),
                 'updated_at'=>now()
@@ -195,7 +196,7 @@ class MahasiswaController extends Controller
                     'tempat_lahir'=>'SungaiPua',
                     'tgl_lahir'=>'2015-05-12',
                     'email'=>'darrel@gmail.com',
-                    'prodi'=>'TRPL',
+                    'prodi_id'=>1,
                     'alamat'=>'Jln.Ahmad Yani no.10',
                     'created_at'=>now(),
                     'updated_at'=>now()
@@ -208,7 +209,7 @@ class MahasiswaController extends Controller
         $mahasiswa=mahasiswa::find(2);
 
         $mahasiswa->tempat_lahir='california';
-        $mahasiswa->prodi='tekom';
+        $mahasiswa->prodi_id=1;
         $mahasiswa->save();
 
         dd($mahasiswa);
@@ -226,7 +227,7 @@ class MahasiswaController extends Controller
         $mahasiswa=mahasiswa::where('nim','2081009')->first()->update(
             [
                 'tempat_lahir'=>'Payakumbuh',
-                'prodi'=>'Teknik Komputer'
+                'prodi_id'=>1
             ]
             );
             dd($mahasiswa);
@@ -239,14 +240,15 @@ class MahasiswaController extends Controller
             dd($mahasiswa);
         }
 
-        public function destroy(){
-            $mahasiswa=mahasiswa::destroy(4);
+        public function destroy(string $id){
+            $mahasiswa = mahasiswa::findOrFail($id);
+            $mahasiswa->delete();
 
-            dd($mahasiswa);
+            return redirect('/mahasiswa')->with('success', 'Data Mahasiswa berhasil dihapus!');
         }
 
         public function massDelete(){
-            $mahasiswa=mahasiswa::where('prodi','TRPL')->delete();
+            $mahasiswa=mahasiswa::where('prodi_id',1)->delete();
             dd($mahasiswa);
         }
 
@@ -258,7 +260,7 @@ class MahasiswaController extends Controller
             echo $mahasiswa[0]->tempat_lahir . "<br>";
             echo $mahasiswa[0]->tgl_lahir . "<br>";
             echo $mahasiswa[0]->email . "<br>";
-            echo $mahasiswa[0]->prodi . "<br>";
+            echo $mahasiswa[0]->prodi_id . "<br>";
             echo $mahasiswa[0]->alamat . "<br>";
             echo $mahasiswa[0]->created_at . "<br>";
             echo $mahasiswa[0]->updated_at . "<br>";
@@ -274,7 +276,7 @@ class MahasiswaController extends Controller
                     echo $mhs->tempat_lahir . "<br>";
                     echo $mhs->tgl_lahir . "<br>";
                     echo $mhs->email . "<br>";
-                    echo $mhs->prodi . "<br>";
+                    echo $mhs->prodi_id . "<br>";
                     echo $mhs->alamat . "<br>";
                     echo $mhs->created_at . "<br>";
                     echo $mhs->updated_at . "<br>";
@@ -288,14 +290,14 @@ class MahasiswaController extends Controller
 
 
         public function getWhere(){
-            $mahasiswa=mahasiswa::where('prodi','MI')
+            $mahasiswa=mahasiswa::where('prodi_id',2)
             ->orderBy('nama_lengkap','asc')
             ->get();
             return view ('akademik.mahasiswa',['mhs'=>$mahasiswa]);
         }
 
         public function first(){
-            $mahasiswa=mahasiswa::where('prodi','MI')->first();
+            $mahasiswa=mahasiswa::where('prodi_id',2)->first();
             return view('akademik.mahasiswa',['mhs'=>[$mahasiswa]]);
         }
 
@@ -305,8 +307,9 @@ class MahasiswaController extends Controller
         }
 
         public function latest(){
+            $prodi=Prodi::all();
             $mahasiswa=mahasiswa::latest()->paginate(10);
-            return view('akademik.mahasiswa',['mhs'=>$mahasiswa]);
+            return view('akademik.mahasiswa',['mhs'=>$mahasiswa, 'prodi'=>$prodi]);
         }
 
         public function limit(){
@@ -341,6 +344,7 @@ class MahasiswaController extends Controller
         }
 
         public function add(){
-            return view('akademik.create');
+            $prodi=Prodi::all();
+            return view('akademik.create', compact('prodi'));
         }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Prodi;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\mahasiswa>
@@ -22,7 +23,7 @@ class mahasiswaFactory extends Factory
             'tempat_lahir'=>fake()->city(),
             'tgl_lahir'=>fake()->date(),
             'email'=>fake()->unique()->safeEmail(),
-            'prodi'=>fake()->randomElement(['TI','SI','MI']),
+            'prodi_id'=>fake()->numberBetween(1,Prodi::count()),
             'alamat'=>fake()->address(),
             'created_at'=>now(),
             'updated_at'=>now()

@@ -5,9 +5,11 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Daftar Matakuliah</h1>
+        @auth
         <a href="/matakuliah/create" class="btn btn-primary shadow-sm">
             <i class="bi bi-plus-circle"></i> Tambah Matakuliah
         </a>
+        @endauth
     </div>
 
     @if (session()->has('success'))
@@ -29,7 +31,9 @@
                     <th scope="col">SKS</th>
                     <th scope="col">Jam</th>
                     <th scope="col">Keterangan</th>
+                    @auth
                     <th scope="col" class="text-center">Aksi</th>
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +53,7 @@
                         <td>{{ $item->sks }}</td>
                         <td>{{ $item->jam }}</td>
                         <td>{{ $item->keterangan ?? '-' }}</td>
+                        @auth
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 <a href="/matakuliah/{{ $item->id }}/edit" class="btn btn-warning btn-sm">
@@ -64,6 +69,7 @@
                                 </form>
                             </div>
                         </td>
+                        @endauth
                     </tr>
                 @empty
                     <tr>

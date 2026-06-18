@@ -9,6 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item"><a class="nav-link" href="/layouts">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/prodi">Prodi</a></li>
                     <li class="nav-item"><a class="nav-link" href="/mahasiswa" aria-disabled="true">Mahasiswa</a></li>
                     <li class="nav-item"><a class="nav-link" href="/dosen" aria-disabled="true">Dosen</a></li>
                     {{-- <li class="nav-item"><a class="nav-link"
@@ -16,6 +17,29 @@
                             disabled>Prodi</a>
                     </li> --}}
                     <li class="nav-item"><a class="nav-link" href="/matakuliah">Matakuliah</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Welcome, {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                                <li>
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link">Login</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>

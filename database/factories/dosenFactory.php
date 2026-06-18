@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Prodi;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\dosen>
@@ -21,7 +22,7 @@ class dosenFactory extends Factory
             'nama'=> fake()->name(),
             'email'=> fake()->unique()->safeEmail(),
             'no_telp'=> fake()->numerify('08##########'),
-            'prodi'=> fake()->randomElement(['TI','SI','MI']),
+            'prodi_id'=> fake()->numberBetween(1,Prodi::count()),
             'alamat'=> fake()->address(),
         ];
     }
