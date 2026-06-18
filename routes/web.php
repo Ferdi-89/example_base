@@ -51,6 +51,10 @@ Route::get('/layouts', function () {
     return view('home');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
 Route::get('/mahasiswa1', function () {
     $arrMhs =['Bill gates','Linus Benedict Torvald','Taylor Otwell','Elon Musk','Muhammad Yazid'];
     return view('akademik.mahasiswa1',['mhs'=>$arrMhs]);
