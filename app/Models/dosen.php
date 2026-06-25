@@ -19,4 +19,9 @@ class dosen extends Model
         'prodi_id',
         'alamat'
     ];
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id');
+    }
 }

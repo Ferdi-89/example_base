@@ -5,6 +5,8 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Database\Seeders\mahasiswaSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -48,11 +50,17 @@ route::fallback(function () {
 // });
 
 Route::get('/layouts', function () {
+    if (auth()->check()) {
+        return view('dashboard');
+    }
     return view('home');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    if (auth()->check()) {
+        return view('dashboard');
+    }
+    return redirect('/layouts');
 });
 
 Route::get('/mahasiswa1', function () {
@@ -126,6 +134,8 @@ Route::get('/all-dosen',[DosenController::class,'get']);
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store']);
 });
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
@@ -151,3 +161,10 @@ Route::post('/matakuliah', [MatakuliahController::class, 'store'])->middleware('
 Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->middleware('auth');
 Route::put('/matakuliah/{id}', [MatakuliahController::class, 'update'])->middleware('auth');
 Route::delete('/matakuliah/{id}', [MatakuliahController::class, 'destroy'])->middleware('auth');
+
+// dosen
+Route::get('/dosen/create', [DosenController::class, 'create'])->middleware('auth');
+Route::post('/dosen', [DosenController::class, 'store'])->middleware('auth');
+
+// user / admin accounts
+Route::get('/users', [UserController::class, 'index'])->middleware('auth');

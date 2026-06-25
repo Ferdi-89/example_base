@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
 use App\Models\dosen;
+use App\Models\Prodi;
 
 class DosenController extends Controller
 {
@@ -176,5 +177,40 @@ class DosenController extends Controller
     public function all(){
         $dosen=dosen::paginate(5);
         return view('akademik.dosen',['dosen'=>$dosen]);
+    }
+
+    public function create()
+    {
+        $prodi = Prodi::all();
+        return view('akademik.dosen.create', compact('prodi'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nik' => 'required|size:18|unique:dosens,nik',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:dosens,email',
+            'no_telp' => 'required|max:15',
+            'prodi_id' => 'required|exists:prodis,id',
+            'alamat' => 'required|string|max:255',
+        ], [
+            'nik.required' => 'NIK wajib diisi.',
+            'nik.size' => 'NIK harus berukuran 18 karakter.',
+            'nik.unique' => 'NIK sudah terdaftar.',
+            'nama.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'no_telp.required' => 'Nomor telepon wajib diisi.',
+            'no_telp.max' => 'Nomor telepon maksimal 15 karakter.',
+            'prodi_id.required' => 'Program studi wajib dipilih.',
+            'prodi_id.exists' => 'Program studi tidak valid.',
+            'alamat.required' => 'Alamat wajib diisi.',
+        ]);
+
+        dosen::create($validated);
+
+        return redirect('/dosen')->with('success', 'Data dosen berhasil ditambahkan.');
     }
 }

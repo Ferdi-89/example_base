@@ -25,10 +25,12 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/matakuliah')
+            return redirect()->intended('/layouts')
                 ->with('success', 'Selamat datang kembali, ' . Auth::user()->name . '!');
         }
 
@@ -47,6 +49,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/matakuliah')->with('success', 'Anda telah berhasil logout.');
+        return redirect('/layouts')->with('success', 'Anda telah berhasil logout.');
     }
 }

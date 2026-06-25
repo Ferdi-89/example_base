@@ -3,7 +3,20 @@
 @section('title', 'Data Dosen')
 
 @section('container')
-    <h1>Daftar Dosen</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3 pt-3">
+        <h1 class="mb-0">Daftar Dosen</h1>
+        @auth
+        <a href="/dosen/create" class="btn btn-primary">Tambah Dosen</a>
+        @endauth
+    </div>
+
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="table-responsive">
         <table class="table table-bordered table-striped shadow-sm">
             <thead class="table-dark">
@@ -25,7 +38,7 @@
                         <td>{{ $namaDosen->nama }}</td>
                         <td>{{ $namaDosen->email }}</td>
                         <td>{{ $namaDosen->no_telp }}</td>
-                        <td>{{ $namaDosen->prodi }}</td>
+                        <td>{{ $namaDosen->prodi->nama_prodi ?? 'Tidak Terdaftar' }}</td>
                         <td>{{ $namaDosen->alamat }}</td>
                     </tr>
                 @empty

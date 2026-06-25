@@ -25,6 +25,8 @@
                                 Welcome, {{ auth()->user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                                <li><a class="dropdown-item" href="/users">Daftar User</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form action="/logout" method="post">
                                         @csrf
@@ -38,6 +40,9 @@
                     @else
                         <li class="nav-item">
                             <a href="/login" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/register" class="nav-link">Register</a>
                         </li>
                     @endauth
                 </ul>

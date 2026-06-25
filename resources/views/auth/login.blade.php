@@ -9,6 +9,13 @@
             <div class="card-body p-5">
                 <h3 class="text-center mb-4 fw-bold text-primary">Sign In</h3>
                 
+                @if(session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 @if(session()->has('loginError'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('loginError') }}
@@ -28,7 +35,7 @@
                         @enderror
                     </div>
                     
-                    <div class="form-floating mb-4">
+                    <div class="form-floating mb-3">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                         <label for="password">Password</label>
                         @error('password')
@@ -38,7 +45,18 @@
                         @enderror
                     </div>
 
-                    <button class="w-100 btn btn-primary btn-lg rounded-pill shadow-sm" type="submit">Login</button>
+                    <div class="form-check mb-4 text-start">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                        <label class="form-check-label text-muted" for="remember">
+                            Ingat Saya / Remember Me
+                        </label>
+                    </div>
+
+                    <button class="w-100 btn btn-primary btn-lg rounded-pill shadow-sm mb-3" type="submit">Login</button>
+                    
+                    <div class="text-center">
+                        <small class="text-muted">Belum punya akun? <a href="/register" class="text-primary text-decoration-none fw-semibold">Daftar disini</a></small>
+                    </div>
                 </form>
             </div>
         </div>
